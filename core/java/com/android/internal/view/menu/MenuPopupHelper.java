@@ -54,6 +54,8 @@ public class MenuPopupHelper implements AdapterView.OnItemClickListener, View.On
     private final int mPopupStyleAttr;
     private final int mPopupStyleRes;
 
+    private boolean mAllowLeftOverdraw;
+
     private View mAnchorView;
     private ListPopupWindow mPopup;
     private ViewTreeObserver mTreeObserver;
@@ -119,6 +121,10 @@ public class MenuPopupHelper implements AdapterView.OnItemClickListener, View.On
     public int getGravity() {
         return mDropDownGravity;
     }
+    
+    public void setAllowLeftOverdraw(boolean enabled) {
+        mAllowLeftOverdraw = enabled;
+    }
 
     public void show() {
         if (!tryShow()) {
@@ -156,6 +162,7 @@ public class MenuPopupHelper implements AdapterView.OnItemClickListener, View.On
             anchor.addOnAttachStateChangeListener(this);
             mPopup.setAnchorView(anchor);
             mPopup.setDropDownGravity(mDropDownGravity);
+            mPopup.setAllowLeftOverdraw(mAllowLeftOverdraw);
         } else {
             return false;
         }
