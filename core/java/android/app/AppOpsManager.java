@@ -116,7 +116,8 @@ public class AppOpsManager {
 
     // when adding one of these:
     //  - increment _NUM_OP
-    //  - add rows to sOpToSwitch, sOpToString, sOpNames, sOpPerms, sOpDefaultMode, sOpDefaultStrictMode
+    //  - add rows to sOpToSwitch, sOpToString, sOpNames, sOpPerms, sOpDefaultMode, sOpDefaultStrictMode,
+    //    sOpToOpString, sOpStrictMode.
     //  - add descriptive strings to frameworks/base/core/res/res/values/config.xml
     //  - add descriptive strings to Settings/res/values/arrays.xml
     //  - add the op to the appropriate template in AppOpsState.OpsTemplate (settings app)
@@ -249,8 +250,18 @@ public class AppOpsManager {
     public static final int OP_TURN_SCREEN_ON = 61;
     /** @hide Get device accounts. */
     public static final int OP_GET_ACCOUNTS = 62;
+    /** @hide Wifi state change **/
+    public static final int OP_WIFI_CHANGE = 63;
     /** @hide */
-    public static final int _NUM_OP = 63;
+    public static final int OP_BLUETOOTH_CHANGE = 64;
+    /** @hide */
+    public static final int OP_BOOT_COMPLETED = 65;
+    /** @hide */
+    public static final int OP_NFC_CHANGE = 66;
+    /** @hide */
+    public static final int OP_DATA_CONNECT_CHANGE = 67;
+    /** @hide */
+    public static final int _NUM_OP = 68;
 
     /** Access to coarse location information. */
     public static final String OPSTR_COARSE_LOCATION = "android:coarse_location";
@@ -348,6 +359,17 @@ public class AppOpsManager {
     /** @hide Get device accounts. */
     public static final String OPSTR_GET_ACCOUNTS
             = "android:get_accounts";
+    /** @hide **/
+    private static final String OPSTR_WIFI_CHANGE =
+            "android:wifi_change";
+    private static final String OPSTR_BLUETOOTH_CHANGE =
+            "android:bluetooth_change";
+    private static final String OPSTR_BOOT_COMPLETED =
+            "android:boot_completed";
+    private static final String OPSTR_NFC_CHANGE =
+            "android:nfc_change";
+    private static final String OPSTR_DATA_CONNECT_CHANGE =
+            "android:data_connect_change";
 
     /**
      * This maps each operation to the operation that serves as the
@@ -421,6 +443,11 @@ public class AppOpsManager {
             OP_WRITE_EXTERNAL_STORAGE,
             OP_TURN_SCREEN_ON,
             OP_GET_ACCOUNTS,
+            OP_WIFI_CHANGE,
+            OP_BLUETOOTH_CHANGE,
+            OP_BOOT_COMPLETED,
+            OP_NFC_CHANGE,
+            OP_DATA_CONNECT_CHANGE,
     };
 
     /**
@@ -490,7 +517,12 @@ public class AppOpsManager {
             OPSTR_READ_EXTERNAL_STORAGE,
             OPSTR_WRITE_EXTERNAL_STORAGE,
             null,
-            OPSTR_GET_ACCOUNTS
+            OPSTR_GET_ACCOUNTS,
+            OPSTR_WIFI_CHANGE,
+            OPSTR_BLUETOOTH_CHANGE,
+            OPSTR_BOOT_COMPLETED,
+            OPSTR_NFC_CHANGE,
+            OPSTR_DATA_CONNECT_CHANGE,
     };
 
     /**
@@ -561,6 +593,11 @@ public class AppOpsManager {
             "WRITE_EXTERNAL_STORAGE",
             "TURN_ON_SCREEN",
             "GET_ACCOUNTS",
+            "WIFI_CHANGE",
+            "BLUETOOTH_CHANGE",
+            "BOOT_COMPLETED",
+            "NFC_CHANGE",
+            "DATA_CONNECT_CHANGE",
     };
 
     /**
@@ -630,7 +667,12 @@ public class AppOpsManager {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             null, // no permission for turning the screen on
-            Manifest.permission.GET_ACCOUNTS
+            Manifest.permission.GET_ACCOUNTS,
+            Manifest.permission.CHANGE_WIFI_STATE,
+            null,
+            Manifest.permission.RECEIVE_BOOT_COMPLETED,
+            Manifest.permission.NFC,
+            Manifest.permission.MODIFY_PHONE_STATE,
     };
 
     /**
@@ -702,6 +744,11 @@ public class AppOpsManager {
             null, // WRITE_EXTERNAL_STORAGE
             null, // TURN_ON_SCREEN
             null, // GET_ACCOUNTS
+            null, //WIFI_CHANGE
+            null, //BLUETOOTH_CHANGE
+            null, //BOOT_COMPLETED
+            null, //NFC_CHANGE
+            null, //DATA_CONNECT_CHANGE
     };
 
     /**
@@ -772,6 +819,11 @@ public class AppOpsManager {
             false, // WRITE_EXTERNAL_STORAGE
             false, // TURN_ON_SCREEN
             false, // GET_ACCOUNTS
+            true, // WIFI_CHANGE
+            true, // BLUETOOTH_CHANGE
+            true, // BOOT_COMPLETED
+            true, // NFC_CHANGE
+            true, //DATA_CONNECT_CHANGE
     };
 
     /**
@@ -840,6 +892,11 @@ public class AppOpsManager {
             AppOpsManager.MODE_ALLOWED,
             AppOpsManager.MODE_ALLOWED,
             AppOpsManager.MODE_ALLOWED,  // OP_TURN_ON_SCREEN
+            AppOpsManager.MODE_ALLOWED,
+            AppOpsManager.MODE_ALLOWED, // OP_WIFI_CHANGE
+            AppOpsManager.MODE_ALLOWED,     // OP_BLUETOOTH_CHANGE
+            AppOpsManager.MODE_ALLOWED, // OP_BOOT_COMPLETED
+            AppOpsManager.MODE_ALLOWED, // OP_NFC_CHANGE
             AppOpsManager.MODE_ALLOWED,
     };
 
@@ -911,6 +968,85 @@ public class AppOpsManager {
             AppOpsManager.MODE_ALLOWED, // OP_WRITE_EXTERNAL_STORAGE
             AppOpsManager.MODE_ALLOWED, // OP_TURN_ON_SCREEN
             AppOpsManager.MODE_ALLOWED, // OP_GET_ACCOUNTS
+            AppOpsManager.MODE_ASK,     // OP_WIFI_CHANGE
+            AppOpsManager.MODE_ASK,     // OP_BLUETOOTH_CHANGE
+            AppOpsManager.MODE_ALLOWED, // OP_BOOT_COMPLETED
+            AppOpsManager.MODE_ASK,     // OP_NFC_CHANGE
+            AppOpsManager.MODE_ASK,     // OP_DATA_CONNECT_CHANGE
+    };
+
+    /**
+     * This specifies if operation is in strict mode.
+     */
+    private final static boolean[] sOpStrictMode = new boolean[] {
+        true,     // OP_COARSE_LOCATION
+        true,     // OP_FINE_LOCATION
+        true,     // OP_GPS
+        false,    // OP_VIBRATE
+        true,     // OP_READ_CONTACTS
+        true,     // OP_WRITE_CONTACTS
+        true,     // OP_READ_CALL_LOG
+        true,     // OP_WRITE_CALL_LOG
+        false,    // OP_READ_CALENDAR
+        false,    // OP_WRITE_CALENDAR
+        true,     // OP_WIFI_SCAN
+        false,    // OP_POST_NOTIFICATION
+        false,    // OP_NEIGHBORING_CELLS
+        true,     // OP_CALL_PHONE
+        true,     // OP_READ_SMS
+        true,     // OP_WRITE_SMS
+        false,    // OP_RECEIVE_SMS
+        false,    // OP_RECEIVE_EMERGECY_SMS
+        true,     // OP_RECEIVE_MMS
+        false,    // OP_RECEIVE_WAP_PUSH
+        true,     // OP_SEND_SMS
+        false,    // OP_READ_ICC_SMS
+        false,    // OP_WRITE_ICC_SMS
+        false,    // OP_WRITE_SETTINGS
+        false,    // OP_SYSTEM_ALERT_WINDOW
+        false,    // OP_ACCESS_NOTIFICATIONS
+        true,     // OP_CAMERA
+        true,     // OP_RECORD_AUDIO
+        false,    // OP_PLAY_AUDIO
+        false,    // OP_READ_CLIPBOARD
+        false,    // OP_WRITE_CLIPBOARD
+        false,    // OP_TAKE_MEDIA_BUTTONS
+        false,    // OP_TAKE_AUDIO_FOCUS
+        false,    // OP_AUDIO_MASTER_VOLUME
+        false,    // OP_AUDIO_VOICE_VOLUME
+        false,    // OP_AUDIO_RING_VOLUME
+        false,    // OP_AUDIO_MEDIA_VOLUME
+        false,    // OP_AUDIO_ALARM_VOLUME
+        false,    // OP_AUDIO_NOTIFICATION_VOLUME
+        false,    // OP_AUDIO_BLUETOOTH_VOLUME
+        false,    // OP_WAKE_LOCK
+        false,    // OP_MONITOR_LOCATION
+        true,     // OP_MONITOR_HIGH_POWER_LOCATION
+        false,    // OP_GET_USAGE_STATS
+        false,    // OP_MUTE_MICROPHONE
+        false,    // OP_TOAST_WINDOW
+        false,    // OP_PROJECT_MEDIA
+        false,    // OP_ACTIVATE_VPN
+        true,     // OP WALLPAPER
+        false,    //ASSIST_STRUCTURE
+        false,    //ASSIST_SCREENSHOT
+        false,    //READ_PHONE_STATE
+        false,    //ADD_VOICEMAIL
+        false,    // USE_SIP
+        false,    // PROCESS_OUTGOING_CALLS
+        false,    // USE_FINGERPRINT
+        false,    // BODY_SENSORS
+        false,    // READ_CELL_BROADCASTS
+        false,    // MOCK_LOCATION
+        true,     // READ_EXTERNAL_STORAGE
+        true,     // WRITE_EXTERNAL_STORAGE
+        false,    // TURN_ON_SCREEN
+        false,    // GET_ACCOUNTS
+        true,     // OP_WIFI_CHANGE
+        true,     // OP_BLUETOOTH_CHANGE
+        false,    // OP_BOOT_COMPLETED
+        true,     // OP_NFC_CHANGE
+        true,     // OP_DATA_CONNECT_CHANGE
     };
 
     /**
@@ -983,7 +1119,12 @@ public class AppOpsManager {
             false,
             false,
             false,
-            false
+            false,
+            false,     // OP_WIFI_CHANGE
+            false,     // OP_BLUETOOTH_CHANGE
+            false,     // OP_BOOT_COMPLETED
+            false,     // OP_NFC_CHANGE
+            false,     // OP_DATA_CONNECT_CHANGE
     };
 
     /**
@@ -1032,6 +1173,10 @@ public class AppOpsManager {
         if (sOpAllowSystemRestrictionBypass.length != _NUM_OP) {
             throw new IllegalStateException("sOpAllowSYstemRestrictionsBypass length "
                     + sOpRestrictions.length + " should be " + _NUM_OP);
+        }
+        if (sOpStrictMode.length != _NUM_OP) {
+            throw new IllegalStateException("sOpStrictMode length "
+                    + sOpStrictMode.length + " should be " + _NUM_OP);
         }
         for (int i=0; i<_NUM_OP; i++) {
             if (sOpToString[i] != null) {
@@ -1845,5 +1990,45 @@ public class AppOpsManager {
     /** @hide */
     public static boolean isStrictEnable() {
         return SystemProperties.getBoolean("persist.sys.strict_op_enable", false);
+    }
+
+    /**
+     * Check if op in strict mode
+     * @hide
+     */
+    public static boolean isStrictOp(int code) {
+        return sOpStrictMode[code];
+    }
+
+
+    /** @hide */
+    public static int stringToMode(String permission) {
+        if ("allowed".equalsIgnoreCase(permission)) {
+            return AppOpsManager.MODE_ALLOWED;
+        } else if ("ignored".equalsIgnoreCase(permission)) {
+            return AppOpsManager.MODE_IGNORED;
+        } else if ("ask".equalsIgnoreCase(permission)) {
+            return AppOpsManager.MODE_ASK;
+        }
+        return AppOpsManager.MODE_ERRORED;
+    }
+
+    /** @hide */
+    public static int stringOpToOp (String op) {
+        Integer val = sOpStrToOp.get(op);
+        if (val == null) {
+            val = OP_NONE;
+        }
+        return val;
+    }
+
+    /** @hide */
+    public boolean isControlAllowed(int op, String packageName) {
+        boolean isShow = true;
+        try {
+            isShow = mService.isControlAllowed(op, packageName);
+        } catch (RemoteException e) {
+        }
+        return isShow;
     }
 }
