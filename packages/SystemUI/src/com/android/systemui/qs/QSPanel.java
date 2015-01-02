@@ -82,6 +82,7 @@ public class QSPanel extends ViewGroup {
     private boolean mClosingDetail;
 
     private boolean mBrightnessSliderEnabled;
+    private boolean mVibrationEnabled;
 
     private Record mDetailRecord;
     private Callback mCallback;
@@ -141,6 +142,7 @@ public class QSPanel extends ViewGroup {
                 announceForAccessibility(
                         mContext.getString(R.string.accessibility_desc_quick_settings));
                 closeDetail();
+                vibrateTile(20);
             }
         });
     }
@@ -161,13 +163,8 @@ public class QSPanel extends ViewGroup {
         return mBrightnessSliderEnabled;
     }
 
-    public boolean isVibrationEnabled() {
-        return (Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.QUICK_SETTINGS_TILES_VIBRATE, 0, UserHandle.USER_CURRENT) == 1);
-    }
-
     public void vibrateTile(int duration) {
-        if (!isVibrationEnabled()) { return; }
+        if (!mVibrationEnabled) { return; }
         if (mVibrator != null) {
             if (mVibrator.hasVibrator()) { mVibrator.vibrate(duration); }
         }
@@ -425,6 +422,7 @@ public class QSPanel extends ViewGroup {
             public void onToggleStateChanged(boolean state) {
                 if (mDetailRecord == r) {
                     fireToggleStateChanged(state);
+                    vibrateTile(20);
                 }
             }
             @Override
@@ -531,6 +529,7 @@ public class QSPanel extends ViewGroup {
                 @Override
                 public void onClick(View v) {
                     mHost.startActivityDismissingKeyguard(settingsIntent);
+                    vibrateTile(20);
                 }
             });
 
@@ -798,6 +797,9 @@ public class QSPanel extends ViewGroup {
             resolver.registerContentObserver(Settings.Secure.getUriFor(
                     Settings.Secure.QS_SHOW_BRIGHTNESS_SLIDER),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.QUICK_SETTINGS_TILES_VIBRATE),
+                    false, this, UserHandle.USER_ALL);
             update();
         }
 
@@ -822,6 +824,9 @@ public class QSPanel extends ViewGroup {
             mBrightnessSliderEnabled = Settings.Secure.getIntForUser(
             mContext.getContentResolver(), Settings.Secure.QS_SHOW_BRIGHTNESS_SLIDER,
                 1, UserHandle.USER_CURRENT) == 1;
+            mVibrationEnabled = Settings.System.getIntForUser(
+            mContext.getContentResolver(), Settings.System.QUICK_SETTINGS_TILES_VIBRATE,
+                0, UserHandle.USER_CURRENT) == 1;
         }
     }
 }
