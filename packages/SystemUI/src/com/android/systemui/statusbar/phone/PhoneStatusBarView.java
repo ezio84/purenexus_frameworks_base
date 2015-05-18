@@ -30,6 +30,8 @@ import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.TextView;
 
+import com.android.internal.util.gesture.EdgeGesturePosition;
+
 import com.android.systemui.DejankUtils;
 import com.android.systemui.EventLogTags;
 import com.android.systemui.R;
@@ -156,6 +158,8 @@ public class PhoneStatusBarView extends PanelBar {
         // Close the status bar in the next frame so we can show the end of the animation.
         DejankUtils.postAfterTraversal(mHideExpandedRunnable);
         mLastFullyOpenedPanel = null;
+        mBar.restorePieTriggerMask();
+        mBar.setOverwriteImeIsActive(false);
     }
 
     public void removePendingHideExpandedRunnables() {
@@ -169,6 +173,14 @@ public class PhoneStatusBarView extends PanelBar {
             openPanel.sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
         }
         mLastFullyOpenedPanel = openPanel;
+        // Panel is open disable bottom edge and enable all other
+        // if the user activated them
+//        if (mShouldFade) {
+            mBar.updatePieTriggerMask(EdgeGesturePosition.LEFT.FLAG
+                    | EdgeGesturePosition.RIGHT.FLAG
+                    | EdgeGesturePosition.TOP.FLAG, true);
+            mBar.setOverwriteImeIsActive(true);
+//        }
     }
 
     @Override
