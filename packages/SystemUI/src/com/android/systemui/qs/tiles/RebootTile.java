@@ -42,6 +42,11 @@ public class RebootTile extends QSTile<QSTile.BooleanState> {
     }
 
     @Override
+    public boolean hasSensitiveData() {
+        return true;
+    }
+
+    @Override
     protected void handleClick() {
         mRebootToRecovery = !mRebootToRecovery;
         refreshState();
