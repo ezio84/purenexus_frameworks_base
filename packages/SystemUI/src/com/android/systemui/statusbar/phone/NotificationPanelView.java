@@ -267,7 +267,6 @@ public class NotificationPanelView extends PanelView implements
         mQsPanel = (QSPanel) findViewById(R.id.quick_settings_panel);
         mClockView = (TextView) findViewById(R.id.clock_view);
         mScrollView = (ObservableScrollView) findViewById(R.id.scroll_view);
-        mScrollView.setListener(this);
         mScrollView.setFocusable(false);
         mReserveNotificationSpace = findViewById(R.id.reserve_notification_space);
         mNotificationContainerParent = (NotificationsQuickSettingsContainer)
@@ -303,7 +302,6 @@ public class NotificationPanelView extends PanelView implements
         });
     }
 
-    @Override
     protected void loadDimens() {
         super.loadDimens();
         mNotificationTopPadding = getResources().getDimensionPixelSize(
@@ -395,6 +393,7 @@ public class NotificationPanelView extends PanelView implements
     @Override
     public void onAttachedToWindow() {
         mSettingsObserver.observe();
+        mScrollView.setListener(this);
     }
 
     @Override
