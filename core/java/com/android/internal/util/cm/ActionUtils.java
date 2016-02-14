@@ -108,12 +108,10 @@ public class ActionUtils {
 
         final String packageName = lastTask.baseIntent.getComponent().getPackageName();
         final IActivityManager am = ActivityManagerNative.getDefault();
-        final ActivityOptions opts = ActivityOptions.makeCustomAnimation(context,
-                com.android.internal.R.anim.last_app_in,
-                com.android.internal.R.anim.last_app_out);
 
         if (DEBUG) Log.d(TAG, "switching to " + packageName);
-        am.moveTaskToFront(lastTask.id, ActivityManager.MOVE_TASK_NO_USER_ACTION, opts.toBundle());
+        
+        am.moveTaskToFront(lastTask.id, ActivityManager.MOVE_TASK_NO_USER_ACTION, null);
 
         return true;
     }
