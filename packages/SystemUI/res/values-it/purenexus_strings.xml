@@ -131,11 +131,11 @@
     <string name="quick_settings_screen_timeout_detail_title">Timeout schermo</string>
     <string name="quick_settings_ambient_display_label">Ambient display</string>
     <string name="quick_settings_sync_label">Sync</string>
-    <string name="quick_settings_battery_saver_label">Risparmio batteria</string>
+    <string name="quick_settings_battery_saver">Risparmio batteria</string>
     <string name="quick_settings_expanded_desktop">Espanso</string>
     <string name="quick_settings_expanded_desktop_off">Normale</string>
     <string name="quick_settings_screen_off">Spegni schermo</string>
-    <string name="quick_settings_screenshot">Screenshot</string>
+    <string name="quick_settings_screenshot_label">Screenshot</string>
 
     <!-- Weather string format in expanded statusbar header -->
     <string name="status_bar_expanded_header_weather_format"><xliff:g id="temp">%1$s</xliff:g> - <xliff:g id="condition">%2$s</xliff:g></string>
@@ -189,4 +189,14 @@
          values/config.xml) and must be truncated.
          [CHAR LIMIT=4] -->
     <string name="status_bar_notification_info_overflow" translatable="false">\u221E</string>
+    
+    <string name="quick_settings_adb_network">ADB su rete</string>
+    <string name="quick_settings_network_adb_enabled_label">Attivato</string>
+    <string name="quick_settings_network_adb_disabled_label">Disattivato</string>
+    <string name="accessibility_quick_settings_network_adb_off">ADB su rete disattivato.</string>
+    
+    <string name="quick_settings_music_label">Musica</string>
+    <string name="quick_settings_music_play">Play</string>
+    <string name="quick_settings_music_pause">Pausa</string>
+
 </resources>
