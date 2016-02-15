@@ -125,7 +125,6 @@ import com.android.systemui.assist.AssistManager;
 import com.android.systemui.doze.DozeHost;
 import com.android.systemui.doze.DozeLog;
 import com.android.systemui.keyguard.KeyguardViewMediator;
-import com.android.systemui.omni.StatusBarHeaderMachine;
 import com.android.systemui.qs.QSPanel;
 import com.android.systemui.recents.ScreenPinningRequest;
 import com.android.systemui.settings.BrightnessController;
@@ -574,8 +573,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     private boolean mAutohideSuspended;
     private int mStatusBarMode;
     private int mNavigationBarMode;
-
-    private StatusBarHeaderMachine mStatusBarHeaderMachine;
 
     private ViewMediatorCallback mKeyguardViewMediatorCallback;
     private ScrimController mScrimController;
@@ -1145,9 +1142,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         // Private API call to make the shadows look better for Recents
         ThreadedRenderer.overrideProperty("ambientRatio", String.valueOf(1.5f));
 
-        mStatusBarHeaderMachine = new StatusBarHeaderMachine(mContext);
-        mStatusBarHeaderMachine.addObserver(mHeader);
-        mStatusBarHeaderMachine.updateEnablement();
         return mStatusBarView;
     }
 
