@@ -31,6 +31,7 @@ import android.os.Message;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,15 +54,14 @@ import java.util.Collection;
 /** View that represents the quick settings tile panel. **/
 public class QSPanel extends ViewGroup {
     private static final float TILE_ASPECT = 1.2f;
-    private static final float TILE_ASPECT_SMALL = 0.8f;
 
     private final Context mContext;
-    private final ArrayList<TileRecord> mRecords = new ArrayList<TileRecord>();
+    protected final ArrayList<TileRecord> mRecords = new ArrayList<TileRecord>();
     private final View mDetail;
     private final ViewGroup mDetailContent;
     private final TextView mDetailSettingsButton;
     private final TextView mDetailDoneButton;
-    private final View mBrightnessView;
+    protected final View mBrightnessView;
     private final QSDetailClipper mClipper;
     private final H mHandler = new H();
 
@@ -80,7 +80,6 @@ public class QSPanel extends ViewGroup {
     private boolean mClosingDetail;
 
     private boolean mBrightnessSliderEnabled;
-    private boolean mUseFourColumns;
 
     private Record mDetailRecord;
     private Callback mCallback;
@@ -90,9 +89,9 @@ public class QSPanel extends ViewGroup {
     private QSFooter mFooter;
     private boolean mGridContentVisible = true;
 
-    private boolean mUseMainTiles = false;
-
     private SettingsObserver mSettingsObserver;
+
+    private boolean mUseMainTiles = false;
 
     public QSPanel(Context context) {
         this(context, null);
@@ -149,19 +148,6 @@ public class QSPanel extends ViewGroup {
         return mBrightnessSliderEnabled;
     }
 
-    /**
-     * Use three or four columns.
-     */
-    private int useFourColumns() {
-        final Resources res = mContext.getResources();
-        if (mUseFourColumns) {
-            mNumberOfColumns = 4;
-        } else {
-            mNumberOfColumns = res.getInteger(R.integer.quick_settings_num_columns);
-        }
-        return mNumberOfColumns;
-    }
-
     private void updateDetailText() {
         mDetailDoneButton.setText(R.string.quick_settings_done);
         mDetailSettingsButton.setText(R.string.quick_settings_more_settings);
@@ -190,30 +176,61 @@ public class QSPanel extends ViewGroup {
 
     public void updateResources() {
         final Resources res = mContext.getResources();
-        final int columns = Math.max(1, useFourColumns());
-        mCellHeight = res.getDimensionPixelSize(R.dimen.qs_tile_height);
-        if (mUseFourColumns) {
-            mCellWidth = (int)(mCellHeight * TILE_ASPECT_SMALL);
-        } else {
-            mCellWidth = (int)(mCellHeight * TILE_ASPECT);
-        }
         mLargeCellHeight = res.getDimensionPixelSize(R.dimen.qs_dual_tile_height);
         mLargeCellWidth = (int)(mLargeCellHeight * TILE_ASPECT);
         mPanelPaddingBottom = res.getDimensionPixelSize(R.dimen.qs_panel_padding_bottom);
         mDualTileUnderlap = res.getDimensionPixelSize(R.dimen.qs_dual_tile_padding_vertical);
         mBrightnessPaddingTop = res.getDimensionPixelSize(R.dimen.qs_brightness_padding_top);
-        if (mColumns != columns) {
-            mColumns = columns;
-            postInvalidate();
-        }
-        for (TileRecord r : mRecords) {
-            r.tile.clearState();
-        }
+        updateNumColumns();
         if (mListening) {
             refreshAllTiles();
             mSettingsObserver.observe();
         }
         updateDetailText();
+    }
+
+    public void updateNumColumns() {
+        final Resources res = mContext.getResources();
+        final ContentResolver resolver = mContext.getContentResolver();
+        int defColumns = Math.max(1, res.getInteger(R.integer.quick_settings_num_columns));
+        int columns = Settings.Secure.getIntForUser(resolver,
+                Settings.Secure.QS_NUM_TILE_COLUMNS, defColumns,
+                UserHandle.USER_CURRENT);
+        if (mColumns != columns) {
+            mColumns = columns;
+        }
+        float aspect = getAspectForColumnCount(columns, res);
+        mCellHeight = Math.round(res.getDimensionPixelSize(
+                R.dimen.qs_tile_height) * aspect);
+        mCellWidth = Math.round(mCellHeight * (TILE_ASPECT * aspect));
+        for (TileRecord record : mRecords) {
+            record.tileView.updateDimens(res, aspect);
+            record.tileView.recreateLabel();
+            if (record.tileView.getVisibility() != GONE) {
+                record.tileView.requestLayout();
+            }
+        }
+        postInvalidate();
+    }
+
+    private float getAspectForColumnCount(int numColumns, Resources res) {
+        TypedValue tileScaleFactor = new TypedValue();
+        int dimen;
+        switch (numColumns) {
+            case 3:
+                dimen = R.dimen.qs_tile_three_column_scale;
+                break;
+            case 4:
+                dimen = R.dimen.qs_tile_four_column_scale;
+                break;
+            case 5:
+                dimen = R.dimen.qs_tile_five_column_scale;
+                break;
+            default:
+                dimen = R.dimen.qs_tile_three_column_scale;
+        }
+        res.getValue(dimen, tileScaleFactor, true);
+        return tileScaleFactor.getFloat();
     }
 
     @Override
@@ -650,13 +667,13 @@ public class QSPanel extends ViewGroup {
         int y;
     }
 
-    private static final class TileRecord extends Record {
-        QSTile<?> tile;
-        QSTileView tileView;
-        int row;
-        int col;
-        boolean scanState;
-        boolean openingDetail;
+    protected static final class TileRecord extends Record {
+        public QSTile<?> tile;
+        public QSTileView tileView;
+        public int row;
+        public int col;
+        public boolean scanState;
+        public boolean openingDetail;
     }
 
     private final AnimatorListenerAdapter mTeardownDetailWhenDone = new AnimatorListenerAdapter() {
@@ -709,9 +726,6 @@ public class QSPanel extends ViewGroup {
             resolver.registerContentObserver(Settings.Secure.getUriFor(
                     Settings.Secure.QS_SHOW_BRIGHTNESS_SLIDER),
                     false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.Secure.getUriFor(
-                    Settings.Secure.QS_USE_FOUR_COLUMNS),
-                    false, this, UserHandle.USER_ALL);
             update();
         }
 
@@ -736,9 +750,6 @@ public class QSPanel extends ViewGroup {
             mBrightnessSliderEnabled = Settings.Secure.getIntForUser(
             mContext.getContentResolver(), Settings.Secure.QS_SHOW_BRIGHTNESS_SLIDER,
                 1, UserHandle.USER_CURRENT) == 1;
-            mUseFourColumns = Settings.Secure.getIntForUser(
-            mContext.getContentResolver(), Settings.Secure.QS_USE_FOUR_COLUMNS,
-                0, UserHandle.USER_CURRENT) == 1;
         }
     }
 }

@@ -66,7 +66,7 @@ public class BatterySaverTile extends QSTile<QSTile.BooleanState> {
     protected void handleUpdateState(BooleanState state, Object arg) {
         state.value = mPm.isPowerSaveMode();
         state.visible = true;
-        state.label = mContext.getString(R.string.quick_settings_battery_saver_label);
+        state.label = mContext.getString(R.string.quick_settings_battery_saver);
         if (state.value) {
             state.icon = ResourceIcon.get(R.drawable.ic_qs_battery_saver_on);
             state.contentDescription =  mContext.getString(

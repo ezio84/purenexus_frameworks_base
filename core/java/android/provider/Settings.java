@@ -6680,16 +6680,11 @@ public final class Settings {
         public static final String QS_SHOW_BRIGHTNESS_SLIDER = "qs_show_brightness_slider";
 
         /**
-         * List of QS tile names
+         * Number of columns to display on the quick settings panel
+         * Default is 3
          * @hide
          */
-        public static final String QS_TILES = "sysui_qs_tiles";
-
-        /**
-         * Whether to show four tiles per row.
-         * @hide
-         */
-        public static final String QS_USE_FOUR_COLUMNS = "qs_use_four_columns";
+        public static final String QS_NUM_TILE_COLUMNS = "sysui_qs_num_tile_columns";
 
         /**
          * Use "main" tiles on the first row of the quick settings panel

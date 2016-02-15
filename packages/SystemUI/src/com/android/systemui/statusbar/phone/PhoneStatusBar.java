@@ -107,9 +107,9 @@ import android.widget.TextView;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.statusbar.NotificationVisibility;
 import com.android.internal.statusbar.StatusBarIcon;
-import com.android.internal.util.cm.WeatherControllerImpl;
-import com.android.internal.util.cm.ActionUtils;
-import com.android.internal.util.pure.DUPackageMonitor;
+import com.android.internal.util.purenexus.ActionUtils;
+import com.android.internal.util.purenexus.DUPackageMonitor;
+import com.android.internal.util.purenexus.WeatherControllerImpl;
 import com.android.keyguard.KeyguardHostView.OnDismissAction;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
@@ -444,6 +444,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.RECENT_CARD_TEXT_COLOR), false, this,
                     UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.Secure.getUriFor(
+                    Settings.Secure.QS_NUM_TILE_COLUMNS), false, this,
+                    UserHandle.USER_ALL);
             update();
         }
 
@@ -513,6 +516,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             }
             if (mIconPolicy != null) {
                 mIconPolicy.setCurrentUserSetup(mUserSetup);
+            }
+
+            if (mQSPanel != null) {
+                mQSPanel.updateNumColumns();
             }
         }
     };
@@ -3644,6 +3651,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         mNetworkController.removeSignalCallback(signalCluster);
         mNetworkController.removeSignalCallback(signalClusterKeyguard);
         mNetworkController.removeSignalCallback(signalClusterQs);
+        if (mQSPanel != null && mQSPanel.getHost() != null) {
+            mQSPanel.getHost().destroy();
+        }
     }
 
     private boolean mDemoModeAllowed;
