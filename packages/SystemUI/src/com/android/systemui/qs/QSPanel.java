@@ -179,7 +179,9 @@ public class QSPanel extends ViewGroup {
             mHost.getKeyguardMonitor().removeCallback(mKeyguardListener);
         }
         mHost = host;
+        if (mHost.getKeyguardMonitor() != null) {
         mHost.getKeyguardMonitor().addCallback(mKeyguardListener);
+        }
         mFooter.setHost(host);
     }
 
