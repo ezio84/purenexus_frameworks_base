@@ -107,6 +107,7 @@ public class RecentController implements RecentPanelView.OnExitListener,
     private int mMainGravity;
     private int mUserGravity;
     private int mPanelColor;
+    private int mImmersiveRecents;
 
     private float mScaleFactor = DEFAULT_SCALE_FACTOR;
 
@@ -408,43 +409,37 @@ public class RecentController implements RecentPanelView.OnExitListener,
     }
 
     /**
-     * For smooth user experience we attach the same systemui visbility
-     * flags the current app, where the user is on, has set.
+     * Set how to handle statusbar and navbar
+     * when showing the slim recents panel
      */
+
     private void setSystemUiVisibilityFlags() {
         int vis = 0;
         try {
             vis = mWindowManagerService.getSystemUIVisibility();
         } catch (RemoteException ex) {
         }
-        boolean layoutBehindNavigation = true;
-        int newVis = View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-        if ((vis & View.STATUS_BAR_TRANSLUCENT) != 0) {
-            newVis |= View.STATUS_BAR_TRANSLUCENT
-                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+        boolean isPrimary = UserHandle.getCallingUserId() == UserHandle.USER_OWNER;
+        int immersiveRecents = isPrimary ? mImmersiveRecents : 0;
+        if (immersiveRecents == 0) {
+        mParentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
         }
-        if ((vis & View.NAVIGATION_BAR_TRANSLUCENT) != 0) {
-            newVis |= View.NAVIGATION_BAR_TRANSLUCENT;
+        if (immersiveRecents == 1) {
+        mParentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
-        if ((vis & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) != 0) {
-            newVis |= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-            layoutBehindNavigation = false;
+        if (immersiveRecents == 2) {
+        mParentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
-        if ((vis & View.SYSTEM_UI_FLAG_FULLSCREEN) != 0) {
-            newVis |= View.SYSTEM_UI_FLAG_FULLSCREEN;
+        if (immersiveRecents == 3) {
+        mParentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
-        if ((vis & View.SYSTEM_UI_FLAG_IMMERSIVE) != 0) {
-            newVis |= View.SYSTEM_UI_FLAG_IMMERSIVE;
-            layoutBehindNavigation = false;
-        }
-        if ((vis & View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY) != 0) {
-            newVis |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-            layoutBehindNavigation = false;
-        }
-        if (layoutBehindNavigation) {
-            newVis |= View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
-        }
-        mParentView.setSystemUiVisibility(newVis);
     }
 
     // Returns if panel is currently showing.
@@ -562,6 +557,9 @@ public class RecentController implements RecentPanelView.OnExitListener,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.RECENT_SHOW_RUNNING_TASKS),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.IMMERSIVE_RECENTS),
+                    false, this, UserHandle.USER_ALL);
             update();
         }
 
@@ -621,6 +619,11 @@ public class RecentController implements RecentPanelView.OnExitListener,
                 mRecentContent.setBackgroundColor(
                         mContext.getResources().getColor(R.color.recent_background));
             }
+
+            // Check the immersive mode the user wants
+            mImmersiveRecents = Settings.System.getIntForUser(
+                    resolver, Settings.System.IMMERSIVE_RECENTS, 0,
+                    UserHandle.USER_CURRENT);
         }
     }
 
