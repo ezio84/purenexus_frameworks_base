@@ -218,7 +218,7 @@ public abstract class BaseStatusBar extends SystemUI implements
 
     private RecentsComponent mRecents;
     private RecentController mSlimRecents;
-    private boolean mUseSlimRecents = false;
+    private boolean mUseSlimRecents = true;
 
     protected int mZenMode;
 
@@ -1151,24 +1151,21 @@ public abstract class BaseStatusBar extends SystemUI implements
     protected void cancelPreloadingRecents() {
         if (mRecents != null) {
             mRecents.cancelPreloadingRecents();
+        } else if (mSlimRecents != null) {
+            mSlimRecents.cancelPreloadingRecentTasksList();
         }
     }
 
     protected void showRecentsNextAffiliatedTask() {
         if (mRecents != null) {
-            mRecents.showNextAffiliatedTask();
+             mRecents.showNextAffiliatedTask();
         }
     }
 
     protected void showRecentsPreviousAffiliatedTask() {
         if (mRecents != null) {
             mRecents.showPrevAffiliatedTask();
-        } else if (mRecents != null) {
-             mRecents.showNextAffiliatedTask();
-        } else if (mSlimRecents != null) {
-            mSlimRecents.cancelPreloadingRecentTasksList();
         }
-
     }
 
     @Override
@@ -1189,13 +1186,13 @@ public abstract class BaseStatusBar extends SystemUI implements
 
     protected void updateRecents() {
         boolean slimRecents = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.USE_SLIM_RECENTS, 0, UserHandle.USER_CURRENT) == 1;
+                Settings.System.USE_SLIM_RECENTS, 1, UserHandle.USER_CURRENT) == 1;
         if (slimRecents) {
             mSlimRecents = new RecentController(mContext, mLayoutDirection);
             mSlimRecents.setCallback(this);
             mRecents = null;
         } else {
-            mRecents = getComponent(Recents.class);
+            mRecents = getComponent(RecentsComponent.class);
             mRecents.setCallback(this);
             mSlimRecents = null;
         }
