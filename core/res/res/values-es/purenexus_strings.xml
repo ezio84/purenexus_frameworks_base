@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2016 The Pure Nexus Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Reboot menu -->
+    <!-- label for item that reboots the phone in phone options dialog -->
+    <string name="global_action_reboot">Reiniciar</string>
+    <!-- Button to reboot the phone, within the Reboot Options dialog -->
+    <string name="reboot_reboot">Reiniciar</string>
+    <!-- Button to reboot the phone into recovery, within the Reboot Options dialog -->
+    <string name="reboot_recovery">Recovery</string>
+    <!-- Button to reboot the phone into bootloader, within the Reboot Options dialog -->
+    <string name="reboot_bootloader">Bootloader</string>
+    <!-- Button to reboot the phone into download, within the Reboot Options dialog -->
+    <string name="reboot_download">Descarga</string>
+    <!-- Button to soft reboot the device, within the Reboot Options dialog -->
+    <string name="reboot_soft">Reinicio rápido</string>
+    <!-- Title of dialog to confirm rebooting. -->
+    <string name="reboot_title">Reiniciar</string>
+    <!-- Reboot Confirmation Dialog.  When the user chooses to reboot the device, there will
+         be a confirmation dialog.  This is the message. -->
+    <string name="reboot_confirm" product="tablet">La tableta se reiniciará.</string>
+    <string name="reboot_confirm" product="default">El teléfono se reiniciará.</string>
+    <!-- Reboot Progress Dialog. This is shown if the user chooses to reboot the phone. -->
+    <string name="reboot_progress">Reiniciando\u2026</string>
+
+    <!-- Global Actions -->
+    <string name="global_action_screenshot">Captura de pantalla</string>
+    <string name="global_action_screen_record">Grabar pantalla</string>
+    <string name="global_action_search">Buscar</string>
+    <string name="global_action_voicesearch">Búsqueda por voz</string>
+    <string name="global_action_current_user">Actual</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want the application to do this. -->
+    <string name="permlab_setKeyguardWallpaper">Establecer fondo de pantalla de bloqueo</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_setKeyguardWallpaper">Permite a la aplicación cambiar el fondo de la pantalla de bloqueo.</string>
+
+    <!-- Long-press back kill application -->
+    <string name="app_killed_message">Aplicación cerrada</string>
+
+    <!-- Vendor mismatched fingerprint warning [CHAR LIMIT=NONE] -->
+    <string name="system_error_vendorprint">La imágen vendor no está actualizada. Por favor flashea la última imágen vendor para este dispositivo.</string>
+
+    <!-- PureNexus is starting -->
+    <string name="android_start_title_pn">Iniciando PureNexus\u2026</string>
+    <string name="android_upgrading_title_pn">Actualizando PureNexus\u2026</string>
+
+    <!-- ADB over network notification -->
+    <string name="adb_net_active_notification_title">ADB sobre red habilitado</string>
+    <!-- ADB over USB and network notification -->
+    <string name="adb_both_active_notification_title">ADB sobre USB &amp; red habilitado</string>
+    <!-- ADB notification message-->
+    <string name="adb_active_generic_notification_message">Toca para deshabilitar debugging.</string>
+
+    <!-- Title of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgrouplab_security">Seguridad</string>
+    <!-- Description of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgroupdesc_security">Permisos relacionados con la información de seguridad del dispositivo.</string>
+
+    <!-- [CHAR LIMIT=NONE] Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_readPhoneBlacklist">leer lista negra de teléfonos</string>
+    <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_readPhoneBlacklist">Permite a la aplicación leer la información de los números de teléfono bloqueados (llamadas y mensajes).</string>
+
+    <!-- [CHAR LIMIT=NONE] Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_changePhoneBlacklist">cambiar la lista negra de teléfonos</string>
+    <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_changePhoneBlacklist">ermite a la aplicación modificar la lista de números de teléfono bloqueados (llamadas y mensajes).</string>
+
+    <string name="default_string">Predeterminado</string>
+</resources>
