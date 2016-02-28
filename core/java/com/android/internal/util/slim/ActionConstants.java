@@ -65,6 +65,10 @@ public class ActionConstants {
     // no action
     public static final String ACTION_NULL                 = "**null**";
 
+    // fixed home and back buttons description
+    public static final String ACTION_HOME_DESC      = "Home";
+    public static final String ACTION_BACK_DESC      = "Back";
+
     // longpress menu description
     public static final String ACTION_NOWONTAP             = "**nowontap**";
     public static final String ACTION_GOOGLE_NOW_DESC      = "Google Now / Now on Tap";

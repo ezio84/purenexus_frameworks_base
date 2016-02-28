@@ -29,12 +29,17 @@ public class ActionConfig {
     public ActionConfig(String clickAction, String clickActionDescription,
                     String longpressAction, String longpressActionDescription, String iconUri) {
         mClickAction = clickAction;
-        mClickActionDescription = clickActionDescription;
         if (mClickAction.equals(ActionConstants.ACTION_HOME)) {
+            mClickActionDescription = ActionConstants.ACTION_HOME_DESC;
             // Google Now / Now on Tap will always be Home longpress action, period !
             mLongpressAction = ActionConstants.ACTION_NOWONTAP;
             mLongpressActionDescription = ActionConstants.ACTION_GOOGLE_NOW_DESC;
+        } else if (mClickAction.equals(ActionConstants.ACTION_BACK)) {
+            mClickActionDescription = ActionConstants.ACTION_BACK_DESC;
+            mLongpressAction = longpressAction;
+            mLongpressActionDescription = longpressActionDescription;
         } else {
+            mClickActionDescription = clickActionDescription;
             mLongpressAction = longpressAction;
             mLongpressActionDescription = longpressActionDescription;
         }
@@ -71,7 +76,13 @@ public class ActionConfig {
     }
 
     public void setClickActionDescription(String description) {
+        if (mClickAction.equals(ActionConstants.ACTION_HOME)) {
+            mClickActionDescription = ActionConstants.ACTION_HOME_DESC;
+        } else if (mClickAction.equals(ActionConstants.ACTION_BACK)) {
+            mClickActionDescription = ActionConstants.ACTION_BACK_DESC;
+        } else {
         mClickActionDescription = description;
+        }
     }
 
     public void setLongpressAction(String action) {
