@@ -143,6 +143,9 @@ public class Action {
                 try {
                     barService.expandSettingsPanel();
                 } catch (RemoteException e) {}
+            } else if (action.equals(ActionConstants.ACTION_NOWONTAP)) {
+                triggerVirtualKeypress(KeyEvent.KEYCODE_ASSIST, isLongpress);
+                return;
             } else if (action.equals(ActionConstants.ACTION_SMART_PULLDOWN)) {
                 if (isKeyguardShowing && isKeyguardSecure) {
                     return;
