@@ -61,6 +61,7 @@ public class ActionConstants {
     public static final String ACTION_SOUND                = "**sound**";
     public static final String ACTION_USERS                = "**users**";
     public static final String ACTION_SMART_PULLDOWN       = "**smart_pulldown**";
+    public static final String ACTION_NOWONTAP             = "**nowontap**";
 
     // no action
     public static final String ACTION_NULL                 = "**null**";
@@ -68,10 +69,6 @@ public class ActionConstants {
     // fixed home and back buttons description
     public static final String ACTION_HOME_DESC      = "Home";
     public static final String ACTION_BACK_DESC      = "Back";
-
-    // longpress menu description
-    public static final String ACTION_NOWONTAP             = "**nowontap**";
-    public static final String ACTION_GOOGLE_NOW_DESC      = "Google Now / Now on Tap";
 
     // this shorcut constant is only used to identify if the user
     // selected in settings a custom app...after it is choosed intent uri
