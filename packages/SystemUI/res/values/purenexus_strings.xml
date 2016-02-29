@@ -155,6 +155,18 @@
          all of the currently visible notifications. [CHAR LIMIT=10]-->
     <string name="clear_recents">Close all recent</string>
 
+     <!-- Statusbar Vibrate silent switch -->
+    <string name="status_bar_vibsil">Vibrate &amp; silent</string>
+
+    <!-- headset icon switch -->
+    <string name="status_bar_headset">Wired headset</string>
+
+    <!-- vpn icon switch -->
+    <string name="status_bar_vpn">VPN</string>
+
+    <!-- bt only connected switch -->
+    <string name="status_bar_btcon">Bluetooth only when connected</string>
+
     <!-- Screenrecord Notification Ticker -->
     <string name="screenrecord_notif_ticker">Screen is being recorded</string>
 
