@@ -359,10 +359,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     private boolean mDoubleTapVib;
     private boolean mCustomMaxKeyguard;
 
-    // PureNexus Logo
-    private boolean mPureLogo;
-    private ImageView pureLogo;
-
     private int mNavigationBarWindowState = WINDOW_STATE_SHOWING;
 
     private int mStatusBarHeaderHeight;
@@ -511,9 +507,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.PIE_CONTROLS), false, this,
                     UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.STATUS_BAR_PURE_LOGO),
-                    false, this, UserHandle.USER_ALL);
             update();
         }
 
@@ -606,10 +599,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                             UserHandle.USER_CURRENT) != 0);
             mMaxKeyguardNotifConfig = Settings.System.getIntForUser(resolver,
                     Settings.System.LOCKSCREEN_MAX_NOTIF_CONFIG, 5, mCurrentUserId);
-
-            mPureLogo = Settings.System.getIntForUser(resolver,
-                    Settings.System.STATUS_BAR_PURE_LOGO, 0, mCurrentUserId) == 1;
-            showPureLogo(mPureLogo);
 
             float overlayalpha = Settings.System.getFloatForUser(mContext.getContentResolver(),
                 Settings.System.LOCKSCREEN_ALPHA, 0.45f, UserHandle.USER_CURRENT);
@@ -3478,15 +3467,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             }
         }
     };
-
-    public void showPureLogo(boolean show) {
-        if (mStatusBarView == null) return;
-        ContentResolver resolver = mContext.getContentResolver();
-        pureLogo = (ImageView) mStatusBarView.findViewById(R.id.pure_logo);
-        if (pureLogo != null) {
-            pureLogo.setVisibility(show ? (mPureLogo ? View.VISIBLE : View.GONE) : View.GONE);
-        }
-    }
 
     private void resetUserExpandedStates() {
         ArrayList<Entry> activeNotifications = mNotificationData.getActiveNotifications();
