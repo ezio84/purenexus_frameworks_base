@@ -60,11 +60,11 @@
     <string name="android_upgrading_title_pn">Aggiornamento PureNexus\u2026</string>
 
     <!-- ADB over network notification -->
-    <string name="adb_net_active_notification_title">ADB over network enabled</string>
+    <string name="adb_net_active_notification_title">ADB su rete attivo</string>
     <!-- ADB over USB and network notification -->
-    <string name="adb_both_active_notification_title">ADB over USB &amp; network enabled</string>
+    <string name="adb_both_active_notification_title">ADB su USB e rete attivo</string>
     <!-- ADB notification message-->
-    <string name="adb_active_generic_notification_message">Touch to disable debugging.</string>
+    <string name="adb_active_generic_notification_message">Tocca per disattivare il debugging.</string>
 
     <!-- Title of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
     <string name="permgrouplab_security">Security</string>
