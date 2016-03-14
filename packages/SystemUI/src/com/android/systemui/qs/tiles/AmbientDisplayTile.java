@@ -16,30 +16,20 @@
 
 package com.android.systemui.qs.tiles;
 
-import android.content.Context;
 import android.content.Intent;
+import android.database.ContentObserver;
+import android.net.Uri;
 import android.provider.Settings;
-import android.provider.Settings.Secure;
 
 import com.android.internal.logging.MetricsLogger;
-import com.android.systemui.qs.SecureSetting;
 import com.android.systemui.qs.QSTile;
 import com.android.systemui.R;
 
 /** Quick settings tile: Ambient Display **/
 public class AmbientDisplayTile extends QSTile<QSTile.BooleanState> {
 
-    private final SecureSetting mSetting;
-
     public AmbientDisplayTile(Host host) {
         super(host);
-
-        mSetting = new SecureSetting(mContext, mHandler, Secure.DOZE_ENABLED) {
-            @Override
-            protected void handleValueChanged(int value, boolean observedChange) {
-                handleRefreshState(value);
-            }
-        };
     }
 
     @Override
@@ -54,7 +44,7 @@ public class AmbientDisplayTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     protected void handleClick() {
-        setEnabled(!mState.value);
+        setEnabled();
         refreshState();
     }
 
@@ -66,20 +56,22 @@ public class AmbientDisplayTile extends QSTile<QSTile.BooleanState> {
         mHost.startActivityDismissingKeyguard(intent);
     }
 
-    private void setEnabled(boolean enabled) {
+    private void setEnabled() {
         Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.DOZE_ENABLED,
-                enabled ? 1 : 0);
+                Settings.Secure.DOZE_ENABLED, isAmbientDisplayEnabled() ? 0 : 1);
+    }
+
+    private boolean isAmbientDisplayEnabled() {
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.DOZE_ENABLED, 1) == 1;
     }
 
     @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
-        final int value = arg instanceof Integer ? (Integer)arg : mSetting.getValue();
-        final boolean enable = value != 0;
-        state.value = enable;
+        state.value = isAmbientDisplayEnabled();
         state.visible = true;
         state.label = mContext.getString(R.string.quick_settings_ambient_display_label);
-        if (enable) {
+        if (state.value) {
             state.icon = ResourceIcon.get(R.drawable.ic_qs_ambientdisplay_on);
             state.contentDescription =  mContext.getString(
                     R.string.accessibility_quick_settings_ambient_display_on);
@@ -101,8 +93,26 @@ public class AmbientDisplayTile extends QSTile<QSTile.BooleanState> {
         }
     }
 
+    private ContentObserver mObserver = new ContentObserver(mHandler) {
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            refreshState();
+        }
+    };
+
+    @Override
+    public void destroy() {
+        mContext.getContentResolver().unregisterContentObserver(mObserver);
+    }
+
     @Override
     public void setListening(boolean listening) {
-        // Do nothing
+        if (listening) {
+            mContext.getContentResolver().registerContentObserver(
+                    Settings.Secure.getUriFor(Settings.Secure.DOZE_ENABLED),
+                    false, mObserver);
+        } else {
+            mContext.getContentResolver().unregisterContentObserver(mObserver);
+        }
     }
 }
