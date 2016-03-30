@@ -20,7 +20,7 @@
     <string name="accessibility_data_connection_hspap">HSPA+</string>
 
     <!-- SystemUI Tuner Parts -->
-    <string name="systemui_tuner_statusbar_title">Statusbar Items</string>
+    <string name="systemui_tuner_statusbar_title">Icone barra di stato</string>
     <string name="systemui_tuner_qs_title">Quick Settings</string>
 
     <!-- Screenshot Delete Toast -->
@@ -201,6 +201,9 @@
     <string name="quick_settings_sound_silent">Silenzioso</string>
 
     <string name="quick_settings_volume_panel_label">Pannello volume</string>
+
+    <string name="status_bar_headset">Cuffie con cavo</string>
+    <string name="status_bar_vibsil">Vibrazione e silenzioso</string>
 
 
 </resources>
