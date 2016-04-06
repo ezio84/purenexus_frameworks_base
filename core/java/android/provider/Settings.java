@@ -4532,6 +4532,19 @@ public final class Settings {
         public static final String INCREASING_RING_RAMP_UP_TIME = "increasing_ring_ramp_up_time";
 
         /**
+         * never show ime switcher notification
+         * by default its shown in the navbar on devices that supports it
+         * @hide
+         */
+        public static final String STATUS_BAR_IME_NOTIFICATION = "status_bar_ime_notification";
+
+        /**
+         * never show ime switcher button in navbar
+         * @hide
+         */
+        public static final String NAVIGATION_BAR_IME_BUTTON = "navigation_bar_ime_button";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
