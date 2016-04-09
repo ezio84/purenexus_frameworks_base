@@ -205,5 +205,7 @@
     <string name="status_bar_headset">Cuffie con cavo</string>
     <string name="status_bar_vibsil">Vibrazione e silenzioso</string>
 
+    <string name="heads_up_snooze_message">Heads up disattivate per <xliff:g id="number">%d</xliff:g> minuti</string>
+
 
 </resources>
