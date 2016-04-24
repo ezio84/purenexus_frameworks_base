@@ -109,6 +109,7 @@ import com.android.internal.statusbar.StatusBarIcon;
 import com.android.internal.util.purenexus.DUPackageMonitor;
 import com.android.internal.util.purenexus.WeatherControllerImpl;
 import com.android.keyguard.KeyguardHostView.OnDismissAction;
+import com.android.keyguard.KeyguardShortcuts;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
 import com.android.keyguard.ViewMediatorCallback;
@@ -341,6 +342,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     KeyguardBottomAreaView mKeyguardBottomArea;
     boolean mLeaveOpenOnKeyguardHide;
     KeyguardIndicationController mKeyguardIndicationController;
+    KeyguardShortcuts mKeyguardShortcuts;
 
     // Keyguard is going away soon.
     private boolean mKeyguardGoingAway;
@@ -1090,6 +1092,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         mHeader.setActivityStarter(this);
         mKeyguardStatusBar = (KeyguardStatusBarView) mStatusBarWindow.findViewById(R.id.keyguard_header);
         mKeyguardStatusView = mStatusBarWindow.findViewById(R.id.keyguard_status_view);
+        mKeyguardShortcuts = (KeyguardShortcuts) mKeyguardStatusView.findViewById(R.id.shortcuts);
         mKeyguardBottomArea =
                 (KeyguardBottomAreaView) mStatusBarWindow.findViewById(R.id.keyguard_bottom_area);
         mKeyguardBottomArea.setActivityStarter(this);
@@ -4169,6 +4172,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         mNotificationPanel.setDozing(mDozing, animate);
         mStackScroller.setDark(mDozing, animate, mWakeUpTouchLocation);
         mScrimController.setDozing(mDozing);
+        mKeyguardShortcuts.setDozing(mDozing);
 
         // Immediately abort the dozing from the doze scrim controller in case of wake-and-unlock
         // for pulsing so the Keyguard fade-out animation scrim can take over.

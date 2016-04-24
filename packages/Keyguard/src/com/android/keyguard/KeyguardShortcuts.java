@@ -50,6 +50,7 @@ public class KeyguardShortcuts extends LinearLayout {
     private SettingsObserver mSettingsObserver;
     private PackageManager mPackageManager;
     private Context mContext;
+    private boolean mDozing = false;
 
     public KeyguardShortcuts(Context context) {
         this(context, null);
@@ -80,9 +81,15 @@ public class KeyguardShortcuts extends LinearLayout {
         mSettingsObserver.unobserve();
     }
 
+    public void setDozing(boolean dozing) {
+        mDozing = dozing;
+        removeAllViews();
+        createShortcuts();
+    }
+
     private void createShortcuts() {
         ArrayList<ActionConfig> actionConfigs = ActionHelper.getLockscreenShortcutConfig(mContext);
-        if (actionConfigs.size() == 0) {
+        if (actionConfigs.size() == 0 || mDozing) {
             setVisibility(View.GONE);
             return;
         }
