@@ -73,6 +73,8 @@ import com.android.systemui.statusbar.policy.AccessibilityController;
 import com.android.systemui.statusbar.policy.FlashlightController;
 import com.android.systemui.statusbar.policy.PreviewInflater;
 
+import java.util.Objects;
+
 import static android.view.accessibility.AccessibilityNodeInfo.ACTION_CLICK;
 import static android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
 
@@ -126,6 +128,9 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
     private boolean mUserSetupComplete;
     private boolean mPrewarmBound;
     private Messenger mPrewarmMessenger;
+
+    private Intent mLastCameraIntent;
+
     private final ServiceConnection mPrewarmConnection = new ServiceConnection() {
 
         @Override
@@ -504,7 +509,8 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
 
     public void launchCamera(String source) {
         final Intent intent;
-        if (!mShortcutHelper.isTargetCustom(LockscreenShortcutsHelper.Shortcuts.RIGHT_SHORTCUT)) {
+        if (source.equals(CAMERA_LAUNCH_SOURCE_POWER_DOUBLE_TAP) || !mShortcutHelper
+                .isTargetCustom(LockscreenShortcutsHelper.Shortcuts.RIGHT_SHORTCUT)) {
             intent = getCameraIntent();
         } else {
             intent = mShortcutHelper.getIntent(LockscreenShortcutsHelper.Shortcuts.RIGHT_SHORTCUT);
@@ -656,9 +662,18 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
         if (isTargetCustom(Shortcuts.RIGHT_SHORTCUT)) {
             mPreviewContainer.removeView(mCameraPreview);
         } else {
-            mCameraPreview = mPreviewInflater.inflatePreview(getCameraIntent());
+            Intent cameraIntent = getCameraIntent();
+            if (!Objects.equals(cameraIntent, mLastCameraIntent)) {
+                if (mCameraPreview != null) {
+                    mPreviewContainer.removeView(mCameraPreview);
+                }
+                mCameraPreview = mPreviewInflater.inflatePreview(cameraIntent);
+                if (mCameraPreview != null) {
+                    mPreviewContainer.addView(mCameraPreview);
+                }
+            }
+            mLastCameraIntent = cameraIntent;
             if (mCameraPreview != null) {
-                mPreviewContainer.addView(mCameraPreview);
                 mCameraPreview.setVisibility(View.INVISIBLE);
             }
         }
