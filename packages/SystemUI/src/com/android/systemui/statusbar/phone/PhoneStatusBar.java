@@ -1844,6 +1844,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         return mNotificationData.hasActiveVisibleNotifications();
     }
 
+    protected boolean hasActiveOngoingNotifications() {
+        return mNotificationData.hasActiveOngoingNotifications();
+    }
+
     protected boolean hasActiveClearableNotifications() {
         return mNotificationData.hasActiveClearableNotifications();
     }

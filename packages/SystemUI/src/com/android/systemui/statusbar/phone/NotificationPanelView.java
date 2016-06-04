@@ -878,9 +878,8 @@ public class NotificationPanelView extends PanelView implements
         showQsOverride &= mStatusBarState == StatusBarState.SHADE;
 
         if (mQsSmartPullDown == 1 && !mStatusBar.hasActiveClearableNotifications()
-                || mQsSmartPullDown == 2 && !mStatusBar.hasActiveVisibleNotifications()
-                || (mQsSmartPullDown == 3 && !mStatusBar.hasActiveVisibleNotifications()
-                        && !mStatusBar.hasActiveClearableNotifications())) {
+                || mQsSmartPullDown == 2 && !mStatusBar.hasActiveOngoingNotifications()
+                || mQsSmartPullDown == 3 && !mStatusBar.hasActiveVisibleNotifications()) {
                 showQsOverride = true;
         }
 
