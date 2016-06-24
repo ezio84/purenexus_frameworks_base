@@ -106,7 +106,6 @@ import android.widget.Toast;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.statusbar.NotificationVisibility;
 import com.android.internal.statusbar.StatusBarIcon;
-import com.android.internal.util.purenexus.WeatherControllerImpl;
 import com.android.keyguard.KeyguardHostView.OnDismissAction;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
@@ -298,7 +297,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     BrightnessMirrorController mBrightnessMirrorController;
     AccessibilityController mAccessibilityController;
     FingerprintUnlockController mFingerprintUnlockController;
-    WeatherControllerImpl mWeatherController;
 
     int mNaturalBarHeight = -1;
 
@@ -1168,7 +1166,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             mUserSwitcherController = new UserSwitcherController(mContext, mKeyguardMonitor,
                     mHandler);
         }
-        mWeatherController = new WeatherControllerImpl(mContext);
+
         mKeyguardUserSwitcher = new KeyguardUserSwitcher(mContext,
                 (ViewStub) mStatusBarWindow.findViewById(R.id.keyguard_user_switcher),
                 mKeyguardStatusBar, mNotificationPanel, mUserSwitcherController);
@@ -1216,7 +1214,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 .setBatteryController(mBatteryController);
         mKeyguardStatusBar.setBatteryController(mBatteryController);
         mHeader.setNextAlarmController(mNextAlarmController);
-        mHeader.setWeatherController(mWeatherController);
 
         PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         mBroadcastReceiver.onReceive(mContext,
