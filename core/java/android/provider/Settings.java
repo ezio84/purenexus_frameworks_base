@@ -3566,6 +3566,12 @@ public final class Settings {
         public static final String KEYGUARD_TOGGLE_TORCH = "keyguard_toggle_torch";
 
         /**
+         * Change fonts for the system lockscreen clock widget
+         * @hide
+         */
+        public static final String LOCK_CLOCK_FONTS = "lock_clock_fonts";
+
+        /**
          * Control whether the accelerometer will be used to change lockscreen
          * orientation.  If 0, it will not be used; if 1, it will be used by default.
          * @hide
