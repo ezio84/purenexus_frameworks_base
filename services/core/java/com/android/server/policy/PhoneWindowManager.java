@@ -5912,15 +5912,26 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     // On TVs volume keys never go to the foreground app
                     result &= ~ACTION_PASS_TO_USER;
                 }
-                // Eat all down & up keys when using volume wake.
-                // This disables volume control, music control, and "beep" on key up.
-                if (isWakeKey && mVolumeWakeScreen) {
-                    mVolumeWakeTriggered = true;
-                    break;
-                } else if (mVolumeWakeTriggered && !down) {
-                    result &= ~ACTION_PASS_TO_USER;
-                    mVolumeWakeTriggered = false;
-                    break;
+                // Eat all volume keys for wake unless music and music control is active
+                // This disables key beep, vol wake based on music active/control states
+                if (mVolBtnMusicControls) {
+                    if (isWakeKey && (!isMusicActive() && mVolumeWakeScreen)) {
+                        mVolumeWakeTriggered = true;
+                        break;
+                    } else if (mVolumeWakeTriggered && !down) {
+                        result &= ~ACTION_PASS_TO_USER;
+                        mVolumeWakeTriggered = false;
+                        break;
+                    }
+                } else {
+                    if (isWakeKey && mVolumeWakeScreen) {
+                        mVolumeWakeTriggered = true;
+                        break;
+                    } else if (mVolumeWakeTriggered && !down) {
+                        result &= ~ACTION_PASS_TO_USER;
+                        mVolumeWakeTriggered = false;
+                        break;
+                    }
                 }
 
                 if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
@@ -6227,7 +6238,11 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             case KeyEvent.KEYCODE_VOLUME_DOWN:
             case KeyEvent.KEYCODE_VOLUME_MUTE:
                 // Volume keys are still wake keys if the device is docked.
+            if (mVolBtnMusicControls) {
+                return !isMusicActive() && mVolumeWakeScreen || mDockMode != Intent.EXTRA_DOCK_STATE_UNDOCKED;
+            } else {
                 return mVolumeWakeScreen || mDockMode != Intent.EXTRA_DOCK_STATE_UNDOCKED;
+            }
         }
         return true;
     }
@@ -6245,7 +6260,11 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             case KeyEvent.KEYCODE_VOLUME_UP:
             case KeyEvent.KEYCODE_VOLUME_DOWN:
             case KeyEvent.KEYCODE_VOLUME_MUTE:
+            if (mVolBtnMusicControls) {
+                return !isMusicActive() && mVolumeWakeScreen || mDockMode != Intent.EXTRA_DOCK_STATE_UNDOCKED;
+            } else {
                 return mVolumeWakeScreen || mDockMode != Intent.EXTRA_DOCK_STATE_UNDOCKED;
+            }
 
             // ignore media and camera keys
             case KeyEvent.KEYCODE_MUTE:
