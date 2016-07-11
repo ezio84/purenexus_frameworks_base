@@ -524,10 +524,6 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
         mBackLandIcon = new BackButtonDrawable(backIconLand);
     }
 
-    public void updateResources() {
-        getIcons(getContext().getResources());
-    }
-
     @Override
     public void setLayoutDirection(int layoutDirection) {
         updateSettings(true);

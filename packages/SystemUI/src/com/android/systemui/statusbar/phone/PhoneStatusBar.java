@@ -3543,7 +3543,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         if (mAssetSeq != newConfig.assetSeq) {
             mAssetSeq = newConfig.assetSeq;
             recreateStatusBar();
-            mNavigationBarView.updateResources();
+            mNavigationBarView.recreateNavigationBar();
         }
         updateResources();
         repositionNavigationBar();
@@ -3745,7 +3745,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             mBrightnessMirrorController.updateResources();
         }
         if (mNavigationBarView != null)  {
-            mNavigationBarView.updateResources();
+            mNavigationBarView.recreateNavigationBar();
         }
     }
 
