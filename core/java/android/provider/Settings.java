@@ -7085,12 +7085,6 @@ public final class Settings {
         public static final String LOCKSCREEN_QUICK_UNLOCK_CONTROL = "lockscreen_quick_unlock_control";
 
         /**
-         * Whether the device should color invert notifications when doze if enabled.
-         * @hide
-         */
-        public static final String DOZE_NOTIFICATION_INVERT_ENABLED = "doze_notification_invert_enabled";
-
-        /**
          * Launch actions for left/right lockscreen targets
          * @hide
          */
