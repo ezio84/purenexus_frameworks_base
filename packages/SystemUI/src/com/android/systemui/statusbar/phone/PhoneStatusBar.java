@@ -3544,7 +3544,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             mAssetSeq = newConfig.assetSeq;
             recreateStatusBar();
             mNavigationBarView.recreateNavigationBar();
-            mPieController.refreshContainer();
         }
         updateResources();
         repositionNavigationBar();
@@ -3747,9 +3746,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         }
         if (mNavigationBarView != null)  {
             mNavigationBarView.recreateNavigationBar();
-        }
-        if (mPieController != null && isPieEnabled()) {
-            mPieController.refreshContainer();
         }
     }
 

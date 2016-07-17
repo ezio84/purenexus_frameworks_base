@@ -243,7 +243,7 @@ public abstract class BaseStatusBar extends SystemUI implements
             new ArrayList<NavigationBarCallback>();
 
     // Pie Control
-    protected PieController mPieController;
+    private PieController mPieController;
     protected NavigationBarOverlay mNavigationBarOverlay;
 
     private EdgeGestureManager mEdgeGestureManager;
