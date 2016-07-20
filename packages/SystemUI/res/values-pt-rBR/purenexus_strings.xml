@@ -168,4 +168,6 @@
   <!-- Heads up snooze toast -->
   <string name="heads_up_snooze_message_one_minute">Heads-up desligadas durante 1 minuto.</string>
   <string name="heads_up_snooze_message">Notificações heads-up estão desabilitadas por <xliff:g id="number"> %d </xliff:g> minutos.</string>
+  <!-- Long-press back kill application -->
+  <string name="app_killed_message">Aplicativo finalizado</string>
 </resources>

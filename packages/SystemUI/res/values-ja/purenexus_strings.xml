@@ -168,4 +168,6 @@
   <!-- Heads up snooze toast -->
   <string name="heads_up_snooze_message_one_minute">ヘッドアップ通知を1分間停止します。</string>
   <string name="heads_up_snooze_message">ヘッドアップ通知を<xliff:g id="number">%d</xliff:g>分間停止します。</string>
+  <!-- Long-press back kill application -->
+  <string name="app_killed_message">アプリケーションを強制終了しました</string>
 </resources>

@@ -43,8 +43,6 @@
   <string name="permlab_setKeyguardWallpaper">设置锁屏壁纸</string>
   <!-- Lockscreen Wallpaper Permission Description -->
   <string name="permdesc_setKeyguardWallpaper">允许应用更改锁屏壁纸。</string>
-  <!-- Long-press back kill application -->
-  <string name="app_killed_message">应用已被终止</string>
   <!-- Vendor mismatched fingerprint warning [CHAR LIMIT=NONE] -->
   <string name="system_error_vendorprint">您设备的 Vendor 似乎不是最新版本，请刷入您设备最新的 Vendor。</string>
   <!-- PureNexus is starting -->

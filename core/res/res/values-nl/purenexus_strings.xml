@@ -43,8 +43,6 @@
   <string name="permlab_setKeyguardWallpaper">vergrendelscherm achtergrond instellen</string>
   <!-- Lockscreen Wallpaper Permission Description -->
   <string name="permdesc_setKeyguardWallpaper">App toestaan om vergrendelscherm achtergrond te wijzigen.</string>
-  <!-- Long-press back kill application -->
-  <string name="app_killed_message">Applicatie beëindigd</string>
   <!-- Vendor mismatched fingerprint warning [CHAR LIMIT=NONE] -->
   <string name="system_error_vendorprint">Het lijkt dat je leveranciersimage is verouderd. Flash de recentste leveranciersimage voor uw apparaat.</string>
   <!-- PureNexus is starting -->

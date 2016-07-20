@@ -43,8 +43,6 @@
   <string name="permlab_setKeyguardWallpaper">ställ in knapplåsbakgrund</string>
   <!-- Lockscreen Wallpaper Permission Description -->
   <string name="permdesc_setKeyguardWallpaper">Ger en app tillåtelse att ändra låsskärmens bakgrundsbild.</string>
-  <!-- Long-press back kill application -->
-  <string name="app_killed_message">Applikation dödad</string>
   <!-- Vendor mismatched fingerprint warning [CHAR LIMIT=NONE] -->
   <string name="system_error_vendorprint">Det verkar som att din vendor image kan vara inaktuell. Vänligen flasha senaste vendor imagen för din enhet.</string>
   <!-- PureNexus is starting -->

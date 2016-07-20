@@ -43,8 +43,6 @@
   <string name="permlab_setKeyguardWallpaper">잠금 화면 배경 설정</string>
   <!-- Lockscreen Wallpaper Permission Description -->
   <string name="permdesc_setKeyguardWallpaper">앱이 잠금 화면 배경을 바꿀 수 있도록 허용합니다.</string>
-  <!-- Long-press back kill application -->
-  <string name="app_killed_message">애플리케이션이 종료되었습니다</string>
   <!-- Vendor mismatched fingerprint warning [CHAR LIMIT=NONE] -->
   <string name="system_error_vendorprint">아마 날짜가 맞지 않는 벤더 이미지인거 같습니다. 당신의 기기에 최신 벤더 이미지를 플래시 해주세요.</string>
   <!-- PureNexus is starting -->

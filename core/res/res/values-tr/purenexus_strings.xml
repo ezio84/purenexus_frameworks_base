@@ -43,8 +43,6 @@
   <string name="permlab_setKeyguardWallpaper">tuş kilidi duvar kağıdını ayarla</string>
   <!-- Lockscreen Wallpaper Permission Description -->
   <string name="permdesc_setKeyguardWallpaper">Uygulama ile kilit ekranı duvar kağıdını değiştirebilirsiniz.</string>
-  <!-- Long-press back kill application -->
-  <string name="app_killed_message">Uygulama sonlandırıldı</string>
   <!-- Vendor mismatched fingerprint warning [CHAR LIMIT=NONE] -->
   <string name="system_error_vendorprint">Bu sizin satıcı yazılımınızın güncel olabileceğini gösteriyor. Cihazınız için en son satıcı yazılımını yükleyiniz.</string>
   <!-- PureNexus is starting -->

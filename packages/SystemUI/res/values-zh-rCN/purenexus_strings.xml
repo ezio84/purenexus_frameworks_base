@@ -168,4 +168,6 @@
   <!-- Heads up snooze toast -->
   <string name="heads_up_snooze_message_one_minute">禁用浮动通知1分钟</string>
   <string name="heads_up_snooze_message">浮动通知被禁用 <xliff:g id="number">%d</xliff:g> 分钟</string>
+  <!-- Long-press back kill application -->
+  <string name="app_killed_message">应用已被终止</string>
 </resources>

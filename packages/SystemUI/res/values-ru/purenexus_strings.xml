@@ -168,4 +168,6 @@
   <!-- Heads up snooze toast -->
   <string name="heads_up_snooze_message_one_minute">Всплывающие уведомления отложены на 1 минуту.</string>
   <string name="heads_up_snooze_message">\"Всплывающее уведомления\" будут выключены в течение <xliff:g id="number">%d</xliff:g> минут[ы].</string>
+  <!-- Long-press back kill application -->
+  <string name="app_killed_message">Приложение закрыто</string>
 </resources>

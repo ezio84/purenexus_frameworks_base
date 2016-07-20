@@ -168,4 +168,6 @@
   <!-- Heads up snooze toast -->
   <string name="heads_up_snooze_message_one_minute">Kurzes Einblenden ist für eine Minute deaktiviert.</string>
   <string name="heads_up_snooze_message">Kurzes Einblenden ist für <xliff:g id="number">%d</xliff:g> Minuten deaktiviert.</string>
+  <!-- Long-press back kill application -->
+  <string name="app_killed_message">Anwendung beendet</string>
 </resources>

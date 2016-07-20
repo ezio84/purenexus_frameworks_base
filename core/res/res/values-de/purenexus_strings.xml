@@ -43,8 +43,6 @@
   <string name="permlab_setKeyguardWallpaper">Sperrbildschirm-Hintergrund wählen</string>
   <!-- Lockscreen Wallpaper Permission Description -->
   <string name="permdesc_setKeyguardWallpaper">Ermöglicht der App, den Sperrbildschirm-Hintergrund zu ändern.</string>
-  <!-- Long-press back kill application -->
-  <string name="app_killed_message">Anwendung beendet</string>
   <!-- Vendor mismatched fingerprint warning [CHAR LIMIT=NONE] -->
   <string name="system_error_vendorprint">Es scheint, dass Ihr Anbieter-Image veraltet ist. Bitte installieren Sie die aktuellste Version für Ihr Gerät.</string>
   <!-- PureNexus is starting -->

@@ -43,8 +43,6 @@
   <string name="permlab_setKeyguardWallpaper">nustatyti užrakto foną</string>
   <!-- Lockscreen Wallpaper Permission Description -->
   <string name="permdesc_setKeyguardWallpaper">Leidžia programoms keisti ekrano užrakto foną.</string>
-  <!-- Long-press back kill application -->
-  <string name="app_killed_message">Programa uždaryta</string>
   <!-- Vendor mismatched fingerprint warning [CHAR LIMIT=NONE] -->
   <string name="system_error_vendorprint">Atrodo, kad jūsų tiekėjo programinė įranga gali būti pasenusi. Prašome atnaujinti jūsų tiekėjo programinę įrangą.</string>
   <!-- PureNexus is starting -->

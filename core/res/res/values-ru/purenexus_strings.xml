@@ -43,8 +43,6 @@
   <string name="permlab_setKeyguardWallpaper">Установить обои экрана блокировки</string>
   <!-- Lockscreen Wallpaper Permission Description -->
   <string name="permdesc_setKeyguardWallpaper">Разрешить приложениям изменять обои экрана блокировки.</string>
-  <!-- Long-press back kill application -->
-  <string name="app_killed_message">Приложение закрыто</string>
   <!-- Vendor mismatched fingerprint warning [CHAR LIMIT=NONE] -->
   <string name="system_error_vendorprint">Похоже у вас установлен устаревший раздел \"vendor\". Пожалуйста обновите его до последней доступной версии.</string>
   <!-- PureNexus is starting -->

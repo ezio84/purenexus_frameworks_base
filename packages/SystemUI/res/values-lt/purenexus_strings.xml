@@ -168,4 +168,6 @@
   <!-- Heads up snooze toast -->
   <string name="heads_up_snooze_message_one_minute">Iššokantys pranešimai snaudžia 1 minutei.</string>
   <string name="heads_up_snooze_message">Iššokantys pranešimai snaudžia <xliff:g id="number">%d</xliff:g> minutes.</string>
+  <!-- Long-press back kill application -->
+  <string name="app_killed_message">Programa uždaryta</string>
 </resources>

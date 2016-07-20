@@ -43,8 +43,6 @@
   <string name="permlab_setKeyguardWallpaper">ustawianie tapety ekranu blokady</string>
   <!-- Lockscreen Wallpaper Permission Description -->
   <string name="permdesc_setKeyguardWallpaper">Zezwól aplikacji na zmianę tapety ekranu blokady.</string>
-  <!-- Long-press back kill application -->
-  <string name="app_killed_message">Aplikacja została zatrzymana</string>
   <!-- Vendor mismatched fingerprint warning [CHAR LIMIT=NONE] -->
   <string name="system_error_vendorprint">Wygląda na to, że obraz dostawcy może być nieaktualny. Wgraj ostatni obraz dostawcy dla swojego urządzenia.</string>
   <!-- PureNexus is starting -->

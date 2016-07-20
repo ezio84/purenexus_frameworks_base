@@ -43,8 +43,6 @@
   <string name="permlab_setKeyguardWallpaper">ロック画面壁紙の設定</string>
   <!-- Lockscreen Wallpaper Permission Description -->
   <string name="permdesc_setKeyguardWallpaper">アプリによるロック画面壁紙の変更を許可する。</string>
-  <!-- Long-press back kill application -->
-  <string name="app_killed_message">アプリケーションを強制終了しました</string>
   <!-- Vendor mismatched fingerprint warning [CHAR LIMIT=NONE] -->
   <string name="system_error_vendorprint">ベンダーイメージが古くなっている可能性があります。お持ちの端末用の最新のベンダーイメージをフラッシュしてください。</string>
   <!-- PureNexus is starting -->

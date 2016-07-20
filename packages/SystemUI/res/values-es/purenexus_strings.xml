@@ -168,4 +168,6 @@
   <!-- Heads up snooze toast -->
   <string name="heads_up_snooze_message_one_minute">Notificaciones silenciadas por 1 minuto.</string>
   <string name="heads_up_snooze_message">Notificaciones silenciadas por <xliff:g id="number">%d</xliff:g> minutos.</string>
+  <!-- Long-press back kill application -->
+  <string name="app_killed_message">Aplicación cerrada</string>
 </resources>

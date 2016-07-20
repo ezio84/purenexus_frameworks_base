@@ -43,8 +43,6 @@
   <string name="permlab_setKeyguardWallpaper">définir le fond de l\'écran de verrouillage</string>
   <!-- Lockscreen Wallpaper Permission Description -->
   <string name="permdesc_setKeyguardWallpaper">Permet à une application de modifier le fond d\'écran de déverrouillage.</string>
-  <!-- Long-press back kill application -->
-  <string name="app_killed_message">Application tuée</string>
   <!-- Vendor mismatched fingerprint warning [CHAR LIMIT=NONE] -->
   <string name="system_error_vendorprint">Il semble que votre partition \"vendor\" soit obsolète. Veuillez flasher la version la plus récente pour votre appareil.</string>
   <!-- PureNexus is starting -->

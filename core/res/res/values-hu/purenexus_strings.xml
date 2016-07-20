@@ -43,8 +43,6 @@
   <string name="permlab_setKeyguardWallpaper">billentyűzár háttérképének módosítása</string>
   <!-- Lockscreen Wallpaper Permission Description -->
   <string name="permdesc_setKeyguardWallpaper">Lehetővé teszi az alkalmazás számára a képernyőzár hátterének módosítását.</string>
-  <!-- Long-press back kill application -->
-  <string name="app_killed_message">Alkalmazás bezárva</string>
   <!-- Vendor mismatched fingerprint warning [CHAR LIMIT=NONE] -->
   <string name="system_error_vendorprint">Úgy tűnik, hogy a szolgáltató IMG fájl elavult. Kérjük flasheld a legfrissebb képfájlt.</string>
   <!-- PureNexus is starting -->

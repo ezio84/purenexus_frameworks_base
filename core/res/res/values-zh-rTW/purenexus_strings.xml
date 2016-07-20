@@ -43,8 +43,6 @@
   <string name="permlab_setKeyguardWallpaper">設定鎖定畫面桌布</string>
   <!-- Lockscreen Wallpaper Permission Description -->
   <string name="permdesc_setKeyguardWallpaper">允許應用程式變更鎖定畫面桌布。</string>
-  <!-- Long-press back kill application -->
-  <string name="app_killed_message">已終止應用程式</string>
   <!-- Vendor mismatched fingerprint warning [CHAR LIMIT=NONE] -->
   <string name="system_error_vendorprint">您的 vendor 映像檔可能過時了。請為您的裝置刷入最新的 vendor 映像檔。</string>
   <!-- PureNexus is starting -->
