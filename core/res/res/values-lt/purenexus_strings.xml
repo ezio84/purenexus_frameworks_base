@@ -44,7 +44,7 @@
   <!-- Lockscreen Wallpaper Permission Description -->
   <string name="permdesc_setKeyguardWallpaper">Leidžia programoms keisti ekrano užrakto foną.</string>
   <!-- Vendor mismatched fingerprint warning [CHAR LIMIT=NONE] -->
-  <string name="system_error_vendorprint">Atrodo, kad jūsų tiekėjo programinė įranga gali būti pasenusi. Prašome atnaujinti jūsų tiekėjo programinę įrangą.</string>
+  <string name="system_error_vendorprint">Your vendor image does not match the system. Please flash the <xliff:g id="string">%s</xliff:g> vendor image for your device</string>
   <!-- PureNexus is starting -->
   <string name="android_start_title_pn">Paleidžiama PureNexus\u2026</string>
   <string name="android_upgrading_title_pn">Atnaujinama PureNexus\u2026</string>

@@ -44,7 +44,7 @@
   <!-- Lockscreen Wallpaper Permission Description -->
   <string name="permdesc_setKeyguardWallpaper">앱이 잠금 화면 배경을 바꿀 수 있도록 허용합니다.</string>
   <!-- Vendor mismatched fingerprint warning [CHAR LIMIT=NONE] -->
-  <string name="system_error_vendorprint">아마 날짜가 맞지 않는 벤더 이미지인거 같습니다. 당신의 기기에 최신 벤더 이미지를 플래시 해주세요.</string>
+  <string name="system_error_vendorprint">Your vendor image does not match the system. Please flash the <xliff:g id="string">%s</xliff:g> vendor image for your device</string>
   <!-- PureNexus is starting -->
   <string name="android_start_title_pn">퓨어넥서스 시작중\u2026</string>
   <string name="android_upgrading_title_pn">퓨어넥서스 업그레이드 중\u2026</string>
