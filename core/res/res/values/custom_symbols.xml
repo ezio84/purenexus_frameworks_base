@@ -17,7 +17,7 @@
 <resources>
 
     <!-- Nameless -->
-    <java-symbol type="drawable" name="logo_nameless" />
+    <java-symbol type="drawable" name="logo_pnmod" />
 
     <!-- Boot dexopt layout -->
     <java-symbol type="drawable" name="dexopt_brand_logo" />
