@@ -4291,11 +4291,6 @@ public final class Settings {
          */
         public static final String VOLUME_WAKE_SCREEN = "volume_wake_screen";
 
-       /**
-        * USB Data automatic unlock
-        */
-       public static final String USB_DATA_AUTO_UNLOCK = "usb_data_auto_unlock";
-
         /**
          * Whether pie controls are enabled
          * @hide
