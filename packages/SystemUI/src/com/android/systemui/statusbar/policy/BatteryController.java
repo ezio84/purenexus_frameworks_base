@@ -38,10 +38,10 @@ public class BatteryController extends BroadcastReceiver {
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     public static final int STYLE_ICON_PORTRAIT = 0;
-    public static final int STYLE_CIRCLE = 2;
-    public static final int STYLE_GONE = 4;
-    public static final int STYLE_ICON_LANDSCAPE = 5;
-    public static final int STYLE_TEXT = 6;
+    public static final int STYLE_CIRCLE = 1;
+    public static final int STYLE_GONE = 2;
+    public static final int STYLE_ICON_LANDSCAPE = 3;
+    public static final int STYLE_TEXT = 4;
 
     public static final int PERCENTAGE_MODE_OFF = 0;
     public static final int PERCENTAGE_MODE_INSIDE = 1;
