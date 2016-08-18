@@ -218,7 +218,7 @@ public class KeyguardIndicationController {
         String chargingCurrent = "";
 
         if (mChargingCurrent != 0) {
-            chargingCurrent = "\n" + (mChargingCurrent / 1000) + "mA/h";
+            chargingCurrent = "\n" + "Max " + (mChargingCurrent / 1000) + "mA/h";
         }
 
         if (hasChargingTime) {
