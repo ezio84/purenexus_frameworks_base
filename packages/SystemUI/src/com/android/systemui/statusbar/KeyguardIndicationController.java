@@ -30,6 +30,7 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.util.Log;
@@ -73,6 +74,7 @@ public class KeyguardIndicationController {
     private boolean mPowerCharged;
     private int mChargingSpeed;
     private int mChargingCurrent;
+    private boolean mShowChargingCurrent;
     private String mMessageToShowOnScreenOn;
 
     public KeyguardIndicationController(Context context, KeyguardIndicationTextView textView,
@@ -216,8 +218,9 @@ public class KeyguardIndicationController {
         }
 
         String chargingCurrent = "";
-
-        if (mChargingCurrent != 0) {
+        mShowChargingCurrent = Settings.System.getIntForUser(mContext.getContentResolver(),
+            Settings.System.LOCKSCREEN_CHARGING_CURRENT, 0, UserHandle.USER_CURRENT) == 1;
+        if (mChargingCurrent != 0 && mShowChargingCurrent) {
             chargingCurrent = "\n" + "Max " + (mChargingCurrent / 1000) + "mA/h";
         }
 
