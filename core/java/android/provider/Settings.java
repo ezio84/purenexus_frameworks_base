@@ -4530,6 +4530,13 @@ public final class Settings {
         public static final String TOAST_ICON = "toast_icon";
 
         /**
+         * Show data connection type instead of "R" in statusbar / QS signal icon
+         * when roaming and data is is connected 
+         * @hide
+         */
+        public static final String DATACONNECTION_WHEN_ROAMING = "dataconnection_when_roaming";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
